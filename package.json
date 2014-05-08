@@ -1,0 +1,19 @@
+{
+  "name": "ng-pourover",
+  "version": "0.1.0",
+  "description": "PourOver wrapper for Angular.js with super-quick pagination and filtering.",
+  "main": "module/ng-pourover.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Wildhoney/ngPourOver.git"
+  },
+  "author": "Adam Timberlake <adam.timberlake@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Wildhoney/ngPourOver/issues"
+  },
+  "homepage": "https://github.com/Wildhoney/ngPourOver"
+}
