@@ -16,6 +16,8 @@
     "tests"
   ],
   "dependencies": {
-    "pourover": "*"
+    "pourover": "*",
+    "underscore": "~1.6.0",
+    "angular": "~1.2.16"
   }
 }

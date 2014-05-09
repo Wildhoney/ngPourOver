@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>ngPourOver Example</title>
+
+    <!-- Dependencies! -->
+    <script type="text/javascript" src="js/vendor/underscore/underscore.js"></script>
+    <script type="text/javascript" src="js/vendor/angular/angular.js"></script>
+    <script type="text/javascript" src="js/vendor/pourover/pourover.js"></script>
+
+    <!-- Examples! -->
+    <link rel="stylesheet" type="text/css" href="css/default.css" />
+    <script type="text/javascript" src="js/Default.js"></script>
+    <script type="text/javascript" src="js/controllers/BeerController.js"></script>
+
+</head>
+<body ng-app="beerApp">
+
+    <section class="beer" ng-controller="BeerController">
+
+        Beer! {{beer}}
+
+    </section>
+
+</body>
+</html>
