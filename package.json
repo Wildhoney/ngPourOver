@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Wildhoney/ngPourOver/issues"
   },
-  "homepage": "https://github.com/Wildhoney/ngPourOver"
+  "homepage": "https://github.com/Wildhoney/ngPourOver",
+  "dependencies": {
+    "express": "^4.1.2"
+  }
 }
