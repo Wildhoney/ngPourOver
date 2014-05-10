@@ -8,6 +8,7 @@
     <script type="text/javascript" src="js/vendor/underscore/underscore.js"></script>
     <script type="text/javascript" src="js/vendor/angular/angular.js"></script>
     <script type="text/javascript" src="js/vendor/pourover/pourover.js"></script>
+    <script type="text/javascript" src="js/vendor/ng-pourover.js"></script>
 
     <!-- Examples! -->
     <link rel="stylesheet" type="text/css" href="css/default.css" />
@@ -19,7 +20,13 @@
 
     <section class="beer" ng-controller="BeerController">
 
-        Beer! {{beer}}
+        <ul>
+            <li ng-repeat="model in collection | poCollection">
+                {{model.name}}
+            </li>
+        </ul>
+
+        <a href="#" ng-click="collection.applyFilter('name', 'Adam')">Show only Adam</a>
 
     </section>
 

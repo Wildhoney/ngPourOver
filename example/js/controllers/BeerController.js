@@ -1,10 +1,12 @@
 (function($beerApp, $angular) {
 
+    "use strict";
+
     /**
      * @controller BeerController
      * @param $scope {Object}
      */
-    $beerApp.controller('BeerController', function beerController($scope, $http, $interpolate, BeerAPI) {
+    $beerApp.controller('BeerController', function beerController($scope, $http, $interpolate, PourOver, BeerAPI) {
 
         /**
          * @method request
@@ -24,10 +26,21 @@
 
         };
 
-        // Fetch the beers, sunshine!
-        $scope.request('beers.json', function success(response) {
+        var people = [
+            { name: 'Adam' },
+            { name: 'Maria' },
+            { name: 'Artem' },
+            { name: 'Gabriele' }
+        ];
 
-        });
+        $scope.collection = new PourOver(people);
+        $scope.collection.addExactFilter('name', ['Adam', 'Maria']);
+//        $scope.collection.applyFilter('name', 'Adam');
+
+        // Fetch the beers, sunshine!
+//        $scope.request('beers.json', function success(response) {
+//
+//        });
 
     });
 
