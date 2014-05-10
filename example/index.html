@@ -22,11 +22,12 @@
 
         <ul>
             <li ng-repeat="model in collection | poCollection">
-                {{model.name}}
+                {{model.name}} {{model.age}}
             </li>
         </ul>
 
-        <a href="#" ng-click="collection.applyFilter('name', 'Adam')">Show only Adam</a>
+        <a href="#" ng-click="collection.filterBy('name', 'Adam', 'and')">Show only Adam</a>
+        <a href="#" ng-click="collection.filterBy('age', 12, 'and')">Show only 12</a>
 
     </section>
 

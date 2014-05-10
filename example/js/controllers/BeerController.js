@@ -27,15 +27,16 @@
         };
 
         var people = [
-            { name: 'Adam' },
-            { name: 'Maria' },
-            { name: 'Artem' },
-            { name: 'Gabriele' }
+            { name: 'Adam', age: 12 },
+            { name: 'Maria', age: 23 },
+            { name: 'Artem', age: 16 },
+            { name: 'Adam', age: 25 },
+            { name: 'Gabriele', age: 33 }
         ];
 
         $scope.collection = new PourOver(people);
         $scope.collection.addExactFilter('name', ['Adam', 'Maria']);
-//        $scope.collection.applyFilter('name', 'Adam');
+        $scope.collection.addExactFilter('age', [12, 23, 16, 25, 33]);
 
         // Fetch the beers, sunshine!
 //        $scope.request('beers.json', function success(response) {
