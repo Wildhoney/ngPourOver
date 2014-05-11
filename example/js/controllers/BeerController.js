@@ -35,8 +35,10 @@
         ];
 
         $scope.collection = new PourOver(people);
+
         $scope.collection.addExactFilter('name', ['Adam', 'Maria']);
         $scope.collection.addExactFilter('age', [12, 23, 16, 25, 33]);
+//        $scope.collection.addItem({ name: 'Galina', age: 23 });
 
         // Fetch the beers, sunshine!
 //        $scope.request('beers.json', function success(response) {
