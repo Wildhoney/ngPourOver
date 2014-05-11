@@ -22,7 +22,8 @@
 
         <ul>
             <li ng-repeat="model in collection | poCollection">
-                {{model.name}} is {{model.age}} years of age.
+                {{model.name}} is {{model.age}} years of age,
+                and likes <span ng-repeat="animal in model.likes">{{animal}} </span>
             </li>
         </ul>
 
@@ -33,6 +34,8 @@
             <li>&mdash;</li>
             <li><a href="#" ng-click="collection.filterBy('name', 'Adam', 'and')">Show Adam</a></li>
             <li><a href="#" ng-click="collection.filterBy('name', ['Adam', 'Maria'], 'and')">Show Adam and Maria</a></li>
+            <li>&mdash;</li>
+            <li><a href="#" ng-click="collection.filterBy('likes', 'cats')">Likes Cats</a></li>
         </ul>
 
     </section>

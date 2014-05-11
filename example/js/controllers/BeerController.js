@@ -27,17 +27,18 @@
         };
 
         var people = [
-            { name: 'Adam', age: 12 },
-            { name: 'Maria', age: 23 },
-            { name: 'Artem', age: 16 },
-            { name: 'Adam', age: 25 },
-            { name: 'Gabriele', age: 33 }
+            { name: 'Adam', age: 12, likes: ['cats', 'hedgehogs'] },
+            { name: 'Maria', age: 23, likes: ['cats', 'tortoises'] },
+            { name: 'Artem', age: 16, likes: ['dogs'] },
+            { name: 'Adam', age: 25, likes: ['cats', 'hedgehogs'] },
+            { name: 'Gabriele', age: 33, likes: ['dogs', 'cats'] }
         ];
 
         $scope.collection = new PourOver(people);
 
         $scope.collection.addExactFilter('name');
-        $scope.collection.addExactFilter('age', [12, 23, 16, 25, 33]);
+        $scope.collection.addExactFilter('age');
+        $scope.collection.addInclusionFilter('likes');
 //        $scope.collection.addItem({ name: 'Galina', age: 23 });
 
         // Fetch the beers, sunshine!
