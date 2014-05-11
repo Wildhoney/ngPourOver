@@ -2,7 +2,7 @@
   "name": "ng-pourover",
   "version": "0.1.2",
   "description": "PourOver wrapper for Angular.js with super-quick pagination and filtering.",
-  "main": "module/ng-pourover.js",
+  "main": "dist/ng-pourover.js",
   "scripts": {
     "test": "grunt test"
   },
@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/Wildhoney/ngPourOver",
   "dependencies": {
-    "express": "^4.1.2"
+    "express": "^4.1.2",
+    "grunt": "^0.4.4",
+    "grunt-contrib-compress": "^0.8.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-uglify": "^0.4.0"
   }
 }

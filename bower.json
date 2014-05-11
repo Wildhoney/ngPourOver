@@ -6,7 +6,7 @@
     "Adam <adam.timberlake@gmail.com>"
   ],
   "description": "PourOver wrapper for Angular.js with super-quick pagination and filtering.",
-  "main": "module/ng-pourover.js",
+  "main": "dist/ng-pourover.js",
   "license": "MIT",
   "ignore": [
     "**/.*",

@@ -172,7 +172,7 @@
                     return;
                 }
 
-                var currentQuery = filter.current_query;
+                var currentQuery = filter['current_query'];
 
                 if (!query) {
 
