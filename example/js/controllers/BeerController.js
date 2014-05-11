@@ -36,7 +36,7 @@
 
         $scope.collection = new PourOver(people);
 
-        $scope.collection.addExactFilter('name', ['Adam', 'Maria']);
+        $scope.collection.addExactFilter('name');
         $scope.collection.addExactFilter('age', [12, 23, 16, 25, 33]);
 //        $scope.collection.addItem({ name: 'Galina', age: 23 });
 
