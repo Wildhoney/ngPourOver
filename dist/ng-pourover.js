@@ -52,6 +52,13 @@
             _filters: [],
 
             /**
+             * @property _sortBy
+             * @type {String|null}
+             * @private
+             */
+            _sortBy: null,
+
+            /**
              * @method addExactFilter
              * @param property {String}
              * @param values {Array}
@@ -101,6 +108,24 @@
              */
             addItem: function addItem(model) {
                 this._collection.addItems([model]);
+            },
+
+            /**
+             * @method sortBy
+             * @param property {String}
+             * @return {void}
+             */
+            sortBy: function sortBy(property) {
+                this._sortBy = property;
+            },
+
+            /**
+             * @method unsortBy
+             * @param property {String}
+             * @return {void}
+             */
+            unsortBy: function unsortBy(property) {
+                this._sortBy = null;
             },
 
             /**
@@ -187,8 +212,12 @@
                 query   = view.match_set,
                 filters = pourOver._collection.filters;
 
-            view.setSort("name");
-            console.log(view);
+            if (pourOver._sortBy) {
+
+                // Define the sort by algorithm.
+                view.setSort(pourOver._sortBy);
+
+            }
 
             // Iterate over each defined filter.
             _.forEach(filters, function forEach(filter, property) {
@@ -206,13 +235,9 @@
 
             });
 
-            var sortingView = new P.View('sortingView', view.collection);
-            console.log(sortingView);
-            debugger;
-            return sortingView.getCurrentItems();
-
-            // Return everything if no filters are defined, otherwise return the match set.
-//            return (!query) ? pourOver._collection.items : pourOver._collection.get(query.cids);
+            // Update the match set with our defined query, and then return the collection.
+            view.match_set = query;
+            return view.getCurrentItems();
 
         };
 
