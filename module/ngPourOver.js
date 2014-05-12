@@ -198,8 +198,9 @@
 
             });
 
-            // Return everything if no filters are defined, otherwise return the match set.
-            return (!query) ? pourOver._collection.items : pourOver._collection.get(query.cids);
+            // Load current collection into a PourOver view.
+            var view = new PourOver.View('defaultView', pourOver._collection);
+            return view.getCurrentItems();
 
         };
 
