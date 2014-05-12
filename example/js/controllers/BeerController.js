@@ -22,11 +22,11 @@
         };
 
         var people = [
-            { name: 'Adam', age: 12, likes: ['cats', 'hedgehogs'] },
-            { name: 'Maria', age: 23, likes: ['cats', 'tortoises'] },
-            { name: 'Artem', age: 16, likes: ['dogs'] },
-            { name: 'Adam', age: 25, likes: ['cats', 'hedgehogs'] },
-            { name: 'Gabriele', age: 33, likes: ['dogs', 'cats'] }
+            { name: 'Adam',         age: 12,    likes: ['cats', 'hedgehogs'] },
+            { name: 'Maria',        age: 23,    likes: ['cats', 'tortoises'] },
+            { name: 'Artem',        age: 16,    likes: ['dogs'] },
+            { name: 'Adam',         age: 25,    likes: ['cats', 'hedgehogs'] },
+            { name: 'Gabriele',     age: 33,    likes: ['dogs', 'cats'] }
         ];
 
         $scope.collection = new PourOver(people);
