@@ -1,6 +1,6 @@
 {
   "name": "ng-pourover",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "PourOver wrapper for Angular.js with super-quick pagination and filtering.",
   "main": "dist/ng-pourover.js",
   "scripts": {
