@@ -121,10 +121,9 @@
 
             /**
              * @method unsortBy
-             * @param property {String}
              * @return {void}
              */
-            unsortBy: function unsortBy(property) {
+            unsort: function unsort() {
                 this._sortBy = null;
             },
 

@@ -120,11 +120,10 @@
             },
 
             /**
-             * @method unsortBy
-             * @param property {String}
+             * @method unsort
              * @return {void}
              */
-            unsortBy: function unsortBy(property) {
+            unsort: function unsort() {
                 this._sortBy = null;
             },
 
