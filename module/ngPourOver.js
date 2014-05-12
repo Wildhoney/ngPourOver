@@ -58,8 +58,7 @@
              * @return {void}
              */
             addExactFilter: function addExactFilter(property, values) {
-                var filter = P.makeExactFilter(property, values || this._fetchProperties(property));
-                this._collection.addFilters([filter]);
+                this.addFilter('makeExactFilter', property, values);
             },
 
             /**
@@ -69,7 +68,18 @@
              * @return {void}
              */
             addInclusionFilter: function addInclusionFilter(property, values) {
-                var filter = P.makeInclusionFilter(property, values || this._fetchProperties(property));
+                this.addFilter('makeInclusionFilter', property, values);
+            },
+
+            /**
+             * @method addFilter
+             * @param type {String}
+             * @param property {String}
+             * @param values {Array}
+             * @return {void}
+             */
+            addFilter: function addFilter(type, property, values) {
+                var filter = P[type](property, values || this._fetchProperties(property));
                 this._collection.addFilters([filter]);
             },
 
@@ -161,8 +171,10 @@
          */
         return function poCollectionFilter(pourOver) {
 
-            var filters = pourOver._collection.filters,
-                query   = null;
+            // Load current collection into a PourOver view.
+            var view    = new PourOver.View('defaultView', pourOver._collection),
+                query   = view.match_set,
+                filters = pourOver._collection.filters;
 
             // Iterate over each defined filter.
             _.forEach(filters, function forEach(filter, property) {
@@ -173,14 +185,6 @@
                 }
 
                 var currentQuery = filter['current_query'];
-
-                if (!query) {
-
-                    // We don't have a query yet, so let's start at the beginning.
-                    query = currentQuery;
-                    return;
-
-                }
 
                 // Otherwise we'll begin chaining the queries together.
                 var type = pourOver._filters[property];
