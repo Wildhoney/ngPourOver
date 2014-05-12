@@ -58,7 +58,8 @@
              * @return {void}
              */
             addExactFilter: function addExactFilter(property, values) {
-                this.addFilter('makeExactFilter', property, values);
+                var filter = P.makeExactFilter(property, values || this._fetchProperties(property));
+                this._collection.addFilters([filter]);
             },
 
             /**
@@ -68,18 +69,7 @@
              * @return {void}
              */
             addInclusionFilter: function addInclusionFilter(property, values) {
-                this.addFilter('makeInclusionFilter', property, values);
-            },
-
-            /**
-             * @method addFilter
-             * @param type {String}
-             * @param property {String}
-             * @param values {Array}
-             * @return {void}
-             */
-            addFilter: function addFilter(type, property, values) {
-                var filter = P[type](property, values || this._fetchProperties(property));
+                var filter = P.makeInclusionFilter(property, values || this._fetchProperties(property));
                 this._collection.addFilters([filter]);
             },
 
@@ -198,9 +188,8 @@
 
             });
 
-            // Load current collection into a PourOver view.
-            var view = new PourOver.View('defaultView', pourOver._collection);
-            return view.getCurrentItems();
+            // Return everything if no filters are defined, otherwise return the match set.
+            return (!query) ? pourOver._collection.items : pourOver._collection.get(query.cids);
 
         };
 
