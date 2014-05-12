@@ -30,16 +30,31 @@
         ];
 
         $scope.collection = new PourOver(people);
+        $scope.sortBy = 'name';
 
         $scope.collection.addExactFilter('name');
         $scope.collection.addExactFilter('age');
         $scope.collection.addInclusionFilter('likes');
+        $scope.collection.addSort('name', {
+            attr: 'name',
+            fn: function(a, b) {
+                if (a.name < b.name) return -1;
+                if (a.name > b.name) return 1;
+                return 0;
+            }
+        });
+        $scope.collection.addSort('age', {
+            attr: 'age',
+            fn: function(a, b) {
+                return a.age - b.age;
+            }
+        });
 //        $scope.collection.addItem({ name: 'Galina', age: 23 });
 
         // Fetch the beers, sunshine!
-        $scope.request('beers', function success(response) {
-            console.log(response);
-        });
+//        $scope.request('beers', function success(response) {
+//            console.log(response);
+//        });
 
     });
 

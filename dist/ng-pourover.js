@@ -1,4 +1,4 @@
-(function ngPourOver($angular) {
+(function ngPourOver($window, $angular) {
 
     "use strict";
 
@@ -6,16 +6,16 @@
     var poApp = $angular.module('ngPourOver', []);
 
     /**
+     * @property P
+     * @type {Object}
+     */
+    var P = $window.PourOver;
+
+    /**
      * @service ngPourOver
      * @param $window {Object}
      */
     poApp.service('PourOver', ['$window', function ngPourOverCollection($window) {
-
-        /**
-         * @property P
-         * @type {Object}
-         */
-        var P = $window.PourOver;
 
         /**
          * @function ngPourOver
@@ -81,6 +81,17 @@
             addFilter: function addFilter(type, property, values) {
                 var filter = P[type](property, values || this._fetchProperties(property));
                 this._collection.addFilters([filter]);
+            },
+
+            /**
+             * @method addSort
+             * @param name {String}
+             * @param options {Object}
+             * @return {void}
+             */
+            addSort: function addSort(name, options) {
+                var SortingAlgorithm = P.Sort.extend(options);
+                this._collection.addSorts([new SortingAlgorithm(name)]);
             },
 
             /**
@@ -172,9 +183,12 @@
         return function poCollectionFilter(pourOver) {
 
             // Load current collection into a PourOver view.
-            var view    = new PourOver.View('defaultView', pourOver._collection),
+            var view    = new P.View('filteringView', pourOver._collection),
                 query   = view.match_set,
                 filters = pourOver._collection.filters;
+
+            view.setSort("name");
+            console.log(view);
 
             // Iterate over each defined filter.
             _.forEach(filters, function forEach(filter, property) {
@@ -192,11 +206,16 @@
 
             });
 
+            var sortingView = new P.View('sortingView', view.collection);
+            console.log(sortingView);
+            debugger;
+            return sortingView.getCurrentItems();
+
             // Return everything if no filters are defined, otherwise return the match set.
-            return (!query) ? pourOver._collection.items : pourOver._collection.get(query.cids);
+//            return (!query) ? pourOver._collection.items : pourOver._collection.get(query.cids);
 
         };
 
     });
 
-})(window.angular);
+})(window, window.angular);

@@ -35,7 +35,10 @@
             <li><a href="#" ng-click="collection.filterBy('name', 'Adam', 'and')">Show Adam</a></li>
             <li><a href="#" ng-click="collection.filterBy('name', ['Adam', 'Maria'], 'and')">Show Adam and Maria</a></li>
             <li>&mdash;</li>
-            <li><a href="#" ng-click="collection.filterBy('likes', 'cats', 'not')">Likes Cats</a></li>
+            <li><a href="#" ng-click="collection.filterBy('likes', 'cats', 'and')">Likes Cats</a></li>
+            <li>&mdash;</li>
+            <li><a href="#" ng-click="collection.sortBy('name')">Sort By Name</a></li>
+            <li><a href="#" ng-click="collection.unsortBy('name')">Unsort By Name</a></li>
         </ul>
 
     </section>

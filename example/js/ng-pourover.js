@@ -1,4 +1,4 @@
-(function ngPourOver($angular) {
+(function ngPourOver($window, $angular) {
 
     "use strict";
 
@@ -6,16 +6,16 @@
     var poApp = $angular.module('ngPourOver', []);
 
     /**
+     * @property P
+     * @type {Object}
+     */
+    var P = $window.PourOver;
+
+    /**
      * @service ngPourOver
      * @param $window {Object}
      */
     poApp.service('PourOver', ['$window', function ngPourOverCollection($window) {
-
-        /**
-         * @property P
-         * @type {Object}
-         */
-        var P = $window.PourOver;
 
         /**
          * @function ngPourOver
@@ -52,6 +52,13 @@
             _filters: [],
 
             /**
+             * @property _sortBy
+             * @type {String|null}
+             * @private
+             */
+            _sortBy: null,
+
+            /**
              * @method addExactFilter
              * @param property {String}
              * @param values {Array}
@@ -84,12 +91,41 @@
             },
 
             /**
+             * @method addSort
+             * @param name {String}
+             * @param options {Object}
+             * @return {void}
+             */
+            addSort: function addSort(name, options) {
+                var SortingAlgorithm = P.Sort.extend(options);
+                this._collection.addSorts([new SortingAlgorithm(name)]);
+            },
+
+            /**
              * @method addItem
              * @param model {Object}
              * @return {void}
              */
             addItem: function addItem(model) {
                 this._collection.addItems([model]);
+            },
+
+            /**
+             * @method sortBy
+             * @param property {String}
+             * @return {void}
+             */
+            sortBy: function sortBy(property) {
+                this._sortBy = property;
+            },
+
+            /**
+             * @method unsortBy
+             * @param property {String}
+             * @return {void}
+             */
+            unsortBy: function unsortBy(property) {
+                this._sortBy = null;
             },
 
             /**
@@ -172,9 +208,16 @@
         return function poCollectionFilter(pourOver) {
 
             // Load current collection into a PourOver view.
-            var view    = new PourOver.View('defaultView', pourOver._collection),
+            var view    = new P.View('filteringView', pourOver._collection),
                 query   = view.match_set,
                 filters = pourOver._collection.filters;
+
+            if (pourOver._sortBy) {
+
+                // Define the sort by algorithm.
+                view.setSort(pourOver._sortBy);
+
+            }
 
             // Iterate over each defined filter.
             _.forEach(filters, function forEach(filter, property) {
@@ -192,11 +235,12 @@
 
             });
 
-            // Return everything if no filters are defined, otherwise return the match set.
-            return (!query) ? pourOver._collection.items : pourOver._collection.get(query.cids);
+            // Update the match set with our defined query, and then return the collection.
+            view.match_set = query;
+            return view.getCurrentItems();
 
         };
 
     });
 
-})(window.angular);
+})(window, window.angular);
