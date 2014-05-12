@@ -6,7 +6,7 @@
      * @controller BeerController
      * @param $scope {Object}
      */
-    $beerApp.controller('BeerController', function beerController($scope, $http, $interpolate, PourOver, BeerAPI) {
+    $beerApp.controller('BeerController', function beerController($scope, $http, PourOver) {
 
         /**
          * @method request
@@ -16,13 +16,8 @@
          */
         $scope.request = function request(path, params) {
 
-            // Construct the URL for the Beer API request!
-            var url = $interpolate('{{url}}/{{path}}?token={{token}}')({
-                url: BeerAPI.URL, path: path, token: BeerAPI.TOKEN
-            });
-
             // Initialise the AJAX request for the data!
-            return $http.get(url, params || {});
+            return $http.get(path, params || {});
 
         };
 
@@ -42,9 +37,9 @@
 //        $scope.collection.addItem({ name: 'Galina', age: 23 });
 
         // Fetch the beers, sunshine!
-//        $scope.request('beers.json', function success(response) {
-//
-//        });
+        $scope.request('beers', function success(response) {
+            console.log(response);
+        });
 
     });
 

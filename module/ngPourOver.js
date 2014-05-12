@@ -58,8 +58,7 @@
              * @return {void}
              */
             addExactFilter: function addExactFilter(property, values) {
-                var filter = P.makeExactFilter(property, values || this._fetchProperties(property));
-                this._collection.addFilters([filter]);
+                this.addFilter('makeExactFilter', property, values);
             },
 
             /**
@@ -69,7 +68,18 @@
              * @return {void}
              */
             addInclusionFilter: function addInclusionFilter(property, values) {
-                var filter = P.makeInclusionFilter(property, values || this._fetchProperties(property));
+                this.addFilter('makeInclusionFilter', property, values);
+            },
+
+            /**
+             * @method addFilter
+             * @param type {String}
+             * @param property {String}
+             * @param values {Array}
+             * @return {void}
+             */
+            addFilter: function addFilter(type, property, values) {
+                var filter = P[type](property, values || this._fetchProperties(property));
                 this._collection.addFilters([filter]);
             },
 
