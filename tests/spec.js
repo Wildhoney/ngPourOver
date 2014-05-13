@@ -13,8 +13,8 @@ describe('ngPourOver', function() {
                 { name: 'Maria', friends: ['Adam'] },
                 { name: 'Artem', friends: ['Adam'] }];
 
-            $pourOver      = new _PourOver_(collection);
-            $filter        = _$filter_;
+            $pourOver = new _PourOver_(collection);
+            $filter   = _$filter_;
 
         });
 
@@ -106,7 +106,7 @@ describe('ngPourOver', function() {
         collection = $filter('poCollection')($pourOver);
         expect(collection.length).toEqual(2);
 
-        $pourOver.unfilterBy('friends');
+        $pourOver.unfilter();
         collection = $filter('poCollection')($pourOver);
         expect(collection.length).toEqual(3);
 

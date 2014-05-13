@@ -166,6 +166,24 @@
             },
 
             /**
+             * @property unfilter
+             * @return {void}
+             */
+            unfilter: function unfilter() {
+
+                for (var property in this._collection.filters) {
+
+                    if (this._collection.filters.hasOwnProperty(property)) {
+
+                        this._collection.filters[property].query([]);
+                        delete this._filters[property];
+
+                    }
+
+                }
+            },
+
+            /**
              * @method _fetchProperties
              * @param property {String}
              * @return {Array}
