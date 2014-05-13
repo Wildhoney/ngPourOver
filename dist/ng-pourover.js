@@ -225,15 +225,17 @@
          */
         return function poCollectionFilter(pourOver) {
 
-            if (_.isArray(pourOver)) {
+            console.log(pourOver._collection);
+            
+            if (typeof pourOver._collection === 'undefined') {
 
-                // Return the array immediately as it may not be initialised yet.
+                // Return the item immediately as it may not be initialised yet.
                 return pourOver;
 
             }
 
             // Load current collection into a PourOver view.
-            var view    = new P.View('defaultView', pourOver._collection, { page_size: 1 }),
+            var view    = new P.View('defaultView', pourOver._collection),
                 query   = view['match_set'],
                 filters = pourOver._collection.filters;
 
