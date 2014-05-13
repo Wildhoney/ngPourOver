@@ -207,8 +207,8 @@
         return function poCollectionFilter(pourOver) {
 
             // Load current collection into a PourOver view.
-            var view    = new P.View('defaultView', pourOver._collection, { page_size: 1 }),
-                query   = view.match_set,
+            var view    = new P.View('defaultView', pourOver._collection),
+                query   = view['match_set'],
                 filters = pourOver._collection.filters;
 
             if (pourOver._sortBy) {
@@ -235,7 +235,7 @@
             });
 
             // Update the match set with our defined query, and then return the collection.
-            view.match_set = query;
+            view['match_set'] = query;
             return view.getCurrentItems();
 
         };
