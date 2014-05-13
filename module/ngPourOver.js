@@ -225,8 +225,15 @@
          */
         return function poCollectionFilter(pourOver) {
 
+            if (_.isArray(pourOver)) {
+
+                // Return the array immediately as it may not be initialised yet.
+                return pourOver;
+
+            }
+
             // Load current collection into a PourOver view.
-            var view    = new P.View('defaultView', pourOver._collection),
+            var view    = new P.View('defaultView', pourOver._collection, { page_size: 1 }),
                 query   = view['match_set'],
                 filters = pourOver._collection.filters;
 

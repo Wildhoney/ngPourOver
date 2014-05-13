@@ -13,7 +13,7 @@
     <!-- Examples! -->
     <link rel="stylesheet" type="text/css" href="css/default.css" />
     <script type="text/javascript" src="js/Default.js"></script>
-    <script type="text/javascript" src="js/controllers/BeerController.js"></script>
+    <script type="text/javascript" src="js/controllers/WordsController.js"></script>
 
 </head>
 <body ng-app="beerApp">
@@ -21,24 +21,16 @@
     <section class="beer" ng-controller="BeerController">
 
         <ul>
-            <li ng-repeat="model in collection | poCollection">
-                {{model.name}} is {{model.age}} years of age,
-                and likes <span ng-repeat="animal in model.likes">{{animal}} </span>
-            </li>
+            <li><a href="#" ng-click="collection.filterBy('word', 'Burns')">Filter by "Burns"</a></li>
+            <li><a href="#" ng-click="collection.filterBy('word', ['Burns', 'Hindi'])">Also Filter by "Hindi"</a></li>
+            <li><a href="#" ng-click="collection.filterBy('word', 'Hindi')">Unfilter by "Burns"</a></li>
+            <li><a href="#" ng-click="collection.unfilter()">Unfilter all</a></li>
         </ul>
 
         <ul>
-            <!--<li><a href="#" ng-click="collection.filterBy('name', 'Galina', 'and')">Show Galina</a></li>-->
-            <li><a href="#" ng-click="collection.filterBy('age', 23, 'and')">Show 23</a></li>
-            <li><a href="#" ng-click="collection.unfilterBy('age')">Clear 23</a></li>
-            <li>&mdash;</li>
-            <li><a href="#" ng-click="collection.filterBy('name', 'Adam', 'and')">Show Adam</a></li>
-            <li><a href="#" ng-click="collection.filterBy('name', ['Adam', 'Maria'], 'and')">Show Adam and Maria</a></li>
-            <li>&mdash;</li>
-            <li><a href="#" ng-click="collection.filterBy('likes', 'cats', 'and')">Likes Cats</a></li>
-            <li>&mdash;</li>
-            <li><a href="#" ng-click="collection.sortBy('name')">Sort By Name</a></li>
-            <li><a href="#" ng-click="collection.unsort('name')">Unsort By Name</a></li>
+            <li ng-repeat="model in collection | poCollection">
+                {{model.id}} {{model.word}}
+            </li>
         </ul>
 
     </section>
