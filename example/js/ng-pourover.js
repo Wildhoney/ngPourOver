@@ -15,7 +15,7 @@
      * @service ngPourOver
      * @param $window {Object}
      */
-    poApp.service('PourOver', ['$window', function ngPourOverCollection($window) {
+    poApp.service('PourOver', function ngPourOverCollection() {
 
         /**
          * @function ngPourOver
@@ -120,7 +120,7 @@
             },
 
             /**
-             * @method unsort
+             * @method unsortBy
              * @return {void}
              */
             unsort: function unsort() {
@@ -192,7 +192,7 @@
 
         return service;
 
-    }]);
+    });
 
     /**
      * @filter pourOverFilter
@@ -207,7 +207,7 @@
         return function poCollectionFilter(pourOver) {
 
             // Load current collection into a PourOver view.
-            var view    = new P.View('filteringView', pourOver._collection),
+            var view    = new P.View('defaultView', pourOver._collection, { page_size: 1 }),
                 query   = view.match_set,
                 filters = pourOver._collection.filters;
 
