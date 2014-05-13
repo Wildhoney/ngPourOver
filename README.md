@@ -5,6 +5,17 @@ ngPourOver
 &nbsp;
 <img src="https://badge.fury.io/js/ng-pourover.png" alt="NPM Version" />
 
+Installation Steps
+----------
+
+ * `bower install ng-pourover`;
+ * `cd ng-pourover`;
+ * `npm install`;
+ * `bower install`;
+ * `node example/server.js`;
+ * Browse to [http://localhost:3001/](http://localhost:3001/);
+
+
 Getting Started
 ----------
 
