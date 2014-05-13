@@ -18,6 +18,8 @@
   "dependencies": {
     "pourover": "*",
     "underscore": "~1.6.0",
-    "angular": "~1.2.16"
+    "angular": "~1.2.16",
+    "jasmine": "~2.0.0",
+    "angular-mocks": "~1.2.16"
   }
 }

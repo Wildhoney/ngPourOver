@@ -45,7 +45,7 @@ module.exports = function(grunt) {
             },
             test: {
                 src: 'module/ngPourOver.js',
-                dest: 'example/js/ng-pourover.js'
+                dest: 'example/js/vendor/ng-pourover/ng-pourover.js'
             },
             release: {
                 src: 'releases/<%= pkg.version %>.zip',
@@ -67,16 +67,36 @@ module.exports = function(grunt) {
                     { flatten: true, src: ['dist/**'], dest: './', filter: 'isFile' }
                 ]
             }
+        },
+
+        /**
+         * @property jasmine
+         * @type {Object}
+         */
+        jasmine: {
+            pivotal: {
+                src: 'module/ngPourOver.js',
+                options: {
+                    specs: 'tests/spec.js',
+                    helpers: [
+                        'example/js/vendor/angular/angular.js',
+                        'example/js/vendor/underscore/underscore.js',
+                        'example/js/vendor/pourover/pourover.js',
+                        'example/js/vendor/angular-mocks/angular-mocks.js'
+                    ]
+                }
+            }
         }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-compress');
 
     grunt.registerTask('build', ['copy', 'uglify', 'compress', 'copy']);
-    grunt.registerTask('test', ['jshint']);
-    grunt.registerTask('default', ['jshint', 'compress', 'copy', 'uglify']);
+    grunt.registerTask('test', ['jasmine', 'jshint']);
+    grunt.registerTask('default', ['jshint', 'jasmine', 'compress', 'copy', 'uglify']);
 
 };

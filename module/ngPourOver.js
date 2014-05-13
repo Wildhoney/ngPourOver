@@ -66,6 +66,7 @@
              */
             addExactFilter: function addExactFilter(property, values) {
                 this.addFilter('makeExactFilter', property, values);
+                return false;
             },
 
             /**
@@ -195,7 +196,7 @@
     });
 
     /**
-     * @filter pourOverFilter
+     * @filter poCollection
      */
     poApp.filter('poCollection', function poCollection() {
 
