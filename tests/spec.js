@@ -10,8 +10,12 @@ describe('ngPourOver', function() {
 
             inject(function(_PourOver_, _$filter_) {
 
-                var collection = [{ name: 'Adam' }, { name: 'Maria' }, { name: 'Artem' }];
-                $pourOver       = new _PourOver_(collection);
+                var collection = [
+                    { name: 'Adam',  friends: ['Maria', 'Artem'] },
+                    { name: 'Maria', friends: ['Adam'] },
+                    { name: 'Artem', friends: ['Adam'] }];
+
+                $pourOver      = new _PourOver_(collection);
                 $filter        = _$filter_;
 
             });
@@ -34,7 +38,7 @@ describe('ngPourOver', function() {
             expect($pourOver._fetchProperties('name').length).toEqual(3);
         });
 
-        it('Should be able to filter by name property.', function() {
+        it('Should be able to exact filter by name property.', function() {
 
             var collection;
 
@@ -42,12 +46,29 @@ describe('ngPourOver', function() {
             expect(collection.length).toEqual(3);
 
             expect($pourOver._filters.name).toBeUndefined();
-            $pourOver.addInclusionFilter('name');
+            $pourOver.addExactFilter('name');
             $pourOver.filterBy('name', 'Adam');
             expect($pourOver._filters.name).toBeDefined();
 
-//            collection = $filter('poCollection')($pourOver);
-//            expect(collection.length).toEqual(1);
+            collection = $filter('poCollection')($pourOver);
+            expect(collection.length).toEqual(1);
+
+        });
+
+        it('Should be able to inclusive filter by friends property.', function() {
+
+            var collection;
+
+            collection = $filter('poCollection')($pourOver);
+            expect(collection.length).toEqual(3);
+
+            expect($pourOver._filters.friends).toBeUndefined();
+            $pourOver.addInclusionFilter('friends');
+            $pourOver.filterBy('friends', 'Adam');
+            expect($pourOver._filters.friends).toBeDefined();
+
+            collection = $filter('poCollection')($pourOver);
+            expect(collection.length).toEqual(2);
 
         });
 
