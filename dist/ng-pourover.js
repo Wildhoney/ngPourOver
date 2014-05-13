@@ -225,8 +225,6 @@
          */
         return function poCollectionFilter(pourOver) {
 
-            console.log(pourOver._collection);
-
             if (typeof pourOver._collection === 'undefined') {
 
                 // Return the item immediately as it may not be initialised yet.
