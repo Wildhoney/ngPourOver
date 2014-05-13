@@ -60,7 +60,7 @@ You're even able to unfilter all with the `unfilter` method, and unfilter a spec
 Unit Tests
 ----------
 
-All of `ngPourOver`'s unit tests are written in [Jasmine](http://jasmine.github.io/) and can be run with `grunt test` after you have followed the installation steps above.
+All of `ngPourOver`'s unit tests are written in [Jasmine](http://jasmine.github.io/) and can be run with `grunt test` after you have followed the [installation steps](#installation-steps) above.
 
 Please open a pull request for all commits, and ensure all tests are passing before opening your PR.
 
