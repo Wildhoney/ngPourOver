@@ -45,3 +45,14 @@ $scope.collection.filterBy('word', 'Supercalifragilisticexpialidocious');
 ```
 
 You're even able to unfilter all with the `unfilter` method, and unfilter a specific filter with `unfilterBy`.
+
+Unit Tests
+----------
+
+All of `ngPourOver`'s unit tests are written in [Jasmine](http://jasmine.github.io/) and can be run with `grunt test` after you have followed the installation steps above.
+
+Please open a pull request for all commits, and ensure all tests are passing before opening your PR.
+
+**Every developer's dream:**
+
+<img src="http://i.imgur.com/5eZT87c.png" />
