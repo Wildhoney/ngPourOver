@@ -5,7 +5,7 @@
   "authors": [
     "Adam <adam.timberlake@gmail.com>"
   ],
-  "description": "PourOver wrapper for Angular.js with super-quick pagination and filtering.",
+  "description": "PourOver wrapper for Angular.js with super-quick filtering and sorting.",
   "main": "dist/ng-pourover.js",
   "license": "MIT",
   "ignore": [
