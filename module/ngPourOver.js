@@ -248,7 +248,7 @@
             if (pourOver._pageSize) {
 
                 // Define the page size if we're not using infinity.
-                view['page_size'] = 10;
+                view['page_size'] = pourOver._pageSize;
 
             }
 

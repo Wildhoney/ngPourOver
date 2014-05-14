@@ -39,21 +39,6 @@
 
         });
 
-//        $scope.collection = new PourOver(people);
-//        $scope.sortBy = 'name';
-//
-//        $scope.collection.addExactFilter('name');
-//        $scope.collection.addExactFilter('age');
-//        $scope.collection.addInclusionFilter('likes');
-//
-//
-//        $scope.collection.addSort('age', {
-//            attr: 'age',
-//            fn: function(a, b) {
-//                return a.age - b.age;
-//            }
-//        });
-
     });
 
 })(window.beerApp, window.angular);
