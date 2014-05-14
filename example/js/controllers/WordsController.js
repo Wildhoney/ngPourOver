@@ -29,8 +29,9 @@
 
         $http.get('words.json').then(function then(response) {
 
-            $scope.collection = new PourOver(response.data.splice(0, 50));
+            $scope.collection = new PourOver(response.data);
             $scope.collection.setDebug(true);
+            $scope.collection.setPerPage(50);
             $scope.collection.addExactFilter('word');
             $scope.collection.addSort('name', function(a, b) {
                 if (a.word.toUpperCase() < b.word.toUpperCase()) return -1;

@@ -66,12 +66,28 @@
             _debug: false,
 
             /**
+             * @property perPage
+             * @type {Number}
+             * @default Infinity
+             */
+            _perPage: Infinity,
+
+            /**
              * @method setDebug
              * @param enabled {Boolean}
              * @return {void}
              */
             setDebug: function setDebug(enabled) {
                 this._debug = enabled;
+            },
+
+            /**
+             * @method setPerPage
+             * @param perPage {Number}
+             * @return {void}
+             */
+            setPerPage: function setPerPage(perPage) {
+                this._perPage = perPage;
             },
 
             /**
@@ -139,7 +155,6 @@
              * @return {void}
              */
             sortBy: function sortBy(property) {
-                this._debug++;
                 this._sortBy = property;
             },
 
@@ -148,7 +163,6 @@
              * @return {void}
              */
             unsort: function unsort() {
-                this._debug++;
                 this._sortBy = null;
             },
 
@@ -174,7 +188,6 @@
                     throw "ngPourOver: Filter '" + property + "' hasn't yet been defined.";
                 }
 
-                this._debug++;
                 this._collection.filters[property].query(value);
                 this._filters[property] = type;
 
@@ -186,7 +199,6 @@
              * @return {void}
              */
             unfilterBy: function unfilterBy(property) {
-                this._debug++;
                 this._collection.filters[property].query([]);
                 delete this._filters[property];
             },
@@ -196,8 +208,6 @@
              * @return {void}
              */
             unfilter: function unfilter() {
-
-                this._debug++;
 
                 for (var property in this._collection.filters) {
 
@@ -269,10 +279,10 @@
                 query   = view['match_set'],
                 filters = pourOver._collection.filters;
 
-            if (pourOver._pageSize) {
+            if (pourOver._perPage) {
 
                 // Define the page size if we're not using infinity.
-                view['page_size'] = pourOver._pageSize;
+                view['page_size'] = pourOver._perPage;
 
             }
 
