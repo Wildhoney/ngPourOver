@@ -59,6 +59,13 @@
             _sortBy: null,
 
             /**
+             * @property _sortAscending
+             * @type {Boolean}
+             * @default true
+             */
+            _sortAscending: true,
+
+            /**
              * @property _debug
              * @type {Boolean}
              * @default false
@@ -141,21 +148,36 @@
             },
 
             /**
+             * @method sortBy
+             * @param property {String}
+             * @param isAscending {Boolean}
+             * @return {void}
+             */
+            sortBy: function sortBy(property, isAscending) {
+
+                if (typeof isAscending === 'undefined' && this._sortBy === property) {
+
+                    // Reverse the sorting if the user clicked on it again.
+                    this._sortAscending = !this._sortAscending;
+
+                } else {
+
+                    // Otherwise we'll add the sorting based on the user's preference.
+                    this._sortAscending = isAscending;
+
+                }
+
+                this._sortBy = property;
+
+            },
+
+            /**
              * @method addItem
              * @param model {Object}
              * @return {void}
              */
             addItem: function addItem(model) {
                 this._collection.addItems([model]);
-            },
-
-            /**
-             * @method sortBy
-             * @param property {String}
-             * @return {void}
-             */
-            sortBy: function sortBy(property) {
-                this._sortBy = property;
             },
 
             /**
@@ -315,6 +337,13 @@
 
             if (pourOver._debug) {
                 $console.timeEnd('timeMeasure');
+            }
+
+            if (!pourOver._sortAscending) {
+
+                // Reverse the order if we're descending.
+                models = models.reverse();
+
             }
 
             return models;

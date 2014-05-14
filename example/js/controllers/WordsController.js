@@ -34,8 +34,8 @@
             $scope.collection.setPerPage(50);
             $scope.collection.addExactFilter('word');
             $scope.collection.addSort('name', function(a, b) {
-                if (a.word.toUpperCase() < b.word.toUpperCase()) return -1;
-                if (a.word.toUpperCase() > b.word.toUpperCase()) return 1;
+                if (a.word.trim().toUpperCase() < b.word.trim().toUpperCase()) return -1;
+                if (a.word.trim().toUpperCase() > b.word.trim().toUpperCase()) return 1;
                 return 0;
             });
 
