@@ -80,12 +80,28 @@
             _perPage: Infinity,
 
             /**
+             * @property _pageNumber
+             * @type {Number}
+             * @default 1
+             */
+            _pageNumber: 1,
+
+            /**
              * @method setDebug
              * @param enabled {Boolean}
              * @return {void}
              */
             setDebug: function setDebug(enabled) {
                 this._debug = enabled;
+            },
+
+            /**
+             * @method setPageNumber
+             * @param pageNumber {Number}
+             * @return {void}
+             */
+            setPageNumber: function setPageNumber(pageNumber) {
+                this._pageNumber = pageNumber;
             },
 
             /**
@@ -300,6 +316,10 @@
             var view    = new P.View('defaultView', pourOver._collection),
                 query   = view['match_set'],
                 filters = pourOver._collection.filters;
+
+            // Update the current page number.
+            console.log(pourOver._pageNumber);
+            view.pageTo(pourOver._pageNumber);
 
             if (pourOver._perPage) {
 
