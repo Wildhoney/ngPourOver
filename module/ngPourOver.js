@@ -94,12 +94,18 @@
             /**
              * @method addSort
              * @param name {String}
-             * @param options {Object}
+             * @param sortingMethod {Function}
              * @return {void}
              */
-            addSort: function addSort(name, options) {
-                var SortingAlgorithm = P.Sort.extend(options);
+            addSort: function addSort(name, sortingMethod) {
+
+                var SortingAlgorithm = P.Sort.extend({
+                    attr: name,
+                    fn:   sortingMethod
+                });
+
                 this._collection.addSorts([new SortingAlgorithm(name)]);
+
             },
 
             /**
