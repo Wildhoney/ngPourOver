@@ -1,4 +1,4 @@
-(function ngPourOver($window, $angular) {
+(function ngPourOver($window, $angular, $console) {
 
     "use strict";
 
@@ -225,6 +225,8 @@
          */
         return function poCollectionFilter(pourOver) {
 
+            $console.time('timeMeasure');
+
             if (typeof pourOver._collection === 'undefined') {
 
                 // Return the item immediately as it may not be initialised yet.
@@ -236,6 +238,13 @@
             var view    = new P.View('defaultView', pourOver._collection),
                 query   = view['match_set'],
                 filters = pourOver._collection.filters;
+
+            if (pourOver._pageSize) {
+
+                // Define the page size if we're not using infinity.
+                view['page_size'] = 10;
+
+            }
 
             if (pourOver._sortBy) {
 
@@ -262,10 +271,12 @@
 
             // Update the match set with our defined query, and then return the collection.
             view['match_set'] = query;
-            return view.getCurrentItems();
+            var models = view.getCurrentItems();
+            $console.timeEnd('timeMeasure');
+            return models;
 
         };
 
     });
 
-})(window, window.angular);
+})(window, window.angular, window.console);

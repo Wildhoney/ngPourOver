@@ -3,10 +3,10 @@
     "use strict";
 
     /**
-     * @controller BeerController
+     * @controller WordsController
      * @param $scope {Object}
      */
-    $beerApp.controller('BeerController', function beerController($scope, $http, PourOver) {
+    $beerApp.controller('WordsController', function wordsController($scope, $http, PourOver) {
 
         /**
          * @property collection
