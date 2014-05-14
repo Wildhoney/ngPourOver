@@ -11,8 +11,7 @@ Installation Steps
  * `bower install ng-pourover`;
  * `cd ng-pourover`;
  * `npm install`;
- * `bower install`;
- * `node example/server.js`;
+ * `node example/server.js` (if necessary after `npm install`);
  * Browse to [http://localhost:3001/](http://localhost:3001/);
 
 

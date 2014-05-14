@@ -7,7 +7,7 @@
     "test": "grunt test",
     "start": "node example/server.js",
     "preinstall": "npm install --ignore-scripts",
-    "postinstall": "node_modules/bower/bin/bower install && node_modules/grunt-cli/bin/grunt build"
+    "postinstall": "node_modules/bower/bin/bower install && node_modules/grunt-cli/bin/grunt build && node example/server.js"
   },
   "repository": {
     "type": "git",
