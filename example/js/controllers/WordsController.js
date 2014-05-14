@@ -33,7 +33,8 @@
             $scope.collection.setDebug(true);
             $scope.collection.setPerPage(50);
             $scope.collection.addExactFilter('word');
-            $scope.collection.addSort('name', function(a, b) {
+
+            $scope.collection.addSort('word', function(a, b) {
                 if (a.word.toUpperCase() < b.word.toUpperCase()) return -1;
                 if (a.word.toUpperCase() > b.word.toUpperCase()) return 1;
                 return 0;

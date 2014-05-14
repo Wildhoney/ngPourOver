@@ -18,23 +18,31 @@
 </head>
 <body ng-app="beerApp">
 
-    <section class="beer" ng-controller="WordsController">
+    <section class="words" ng-controller="WordsController">
 
-        <ul>
-            <li><a href="#" ng-click="collection.filterBy('word', 'Burns')">Filter by "Burns"</a></li>
-            <li><a href="#" ng-click="collection.filterBy('word', ['Burns', 'Hindi'])">Also Filter by "Hindi"</a></li>
-            <li><a href="#" ng-click="collection.filterBy('word', 'Hindi')">Unfilter by "Burns"</a></li>
-            <li><a href="#" ng-click="collection.unfilter()">Unfilter all</a></li>
-            <li><a href="#" ng-click="collection.sortBy('name')">Sort by name</a></li>
+        <ul class="filters">
             <li><a href="#" ng-click="collection.previousPage()">Previous Page</a></li>
             <li><a href="#" ng-click="collection.nextPage()">Next Page</a></li>
+            <li><a href="#" ng-click="collection.unfilter()">Unfilter All</a></li>
         </ul>
 
-        <ul>
-            <li ng-repeat="model in collection | poCollection">
-                {{model.id}} {{model.word}}
-            </li>
-        </ul>
+        <table>
+            <tr>
+                <th class="id">ID</th>
+                <th class="word" ng-click="collection.sortBy('word')">Word</th>
+                <th class="filter">Filter</th>
+            </tr>
+            <tr ng-repeat="model in collection | poCollection">
+                <td>{{model.id}}</td>
+                <td>{{model.word}}</td>
+                <td>
+                    <div class="options">
+                        <a ng-click="collection.filterBy('word', model.word, 'and')">only {{model.word}}</a>
+                        <a ng-click="collection.filterBy('word', model.word, 'not')">not {{model.word}}</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
 
     </section>
 
