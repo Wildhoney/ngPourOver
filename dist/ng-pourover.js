@@ -52,6 +52,13 @@
             _filters: [],
 
             /**
+             * @property _currentIteration
+             * @type {Number}
+             * @default 0
+             */
+            _currentIteration: 0,
+
+            /**
              * @property _sortBy
              * @type {String|null}
              * @private
@@ -101,7 +108,26 @@
              * @return {void}
              */
             setPageNumber: function setPageNumber(pageNumber) {
+                this._currentIteration++;
                 this._pageNumber = pageNumber;
+            },
+
+            /**
+             * @method previousPage
+             * @return {void}
+             */
+            previousPage: function previousPage() {
+                this._currentIteration++;
+                this._pageNumber -= 1;
+            },
+
+            /**
+             * @method nextPage
+             * @return {void}
+             */
+            nextPage: function nextPage() {
+                this._currentIteration++;
+                this._pageNumber += 1;
             },
 
             /**
@@ -110,6 +136,7 @@
              * @return {void}
              */
             setPerPage: function setPerPage(perPage) {
+                this._currentIteration++;
                 this._perPage = perPage;
             },
 
@@ -171,6 +198,8 @@
              */
             sortBy: function sortBy(property, isAscending) {
 
+                this._currentIteration++;
+
                 if (typeof isAscending === 'undefined' && this._sortBy === property) {
 
                     // Reverse the sorting if the user clicked on it again.
@@ -201,6 +230,7 @@
              * @return {void}
              */
             unsort: function unsort() {
+                this._currentIteration++;
                 this._sortBy = null;
             },
 
@@ -212,6 +242,8 @@
              * @return {void}
              */
             filterBy: function filterBy(property, value, type) {
+
+                this._currentIteration++;
 
                 // Assume the default type if none specified.
                 type = type || this.DEFAULT_TYPE;
@@ -237,6 +269,7 @@
              * @return {void}
              */
             unfilterBy: function unfilterBy(property) {
+                this._currentIteration++;
                 this._collection.filters[property].query([]);
                 delete this._filters[property];
             },
@@ -246,6 +279,8 @@
              * @return {void}
              */
             unfilter: function unfilter() {
+
+                this._currentIteration++;
 
                 for (var property in this._collection.filters) {
 
@@ -295,6 +330,19 @@
     poApp.filter('poCollection', function poCollection() {
 
         /**
+         * @property lastIteration
+         * @type {Number}
+         * @default 0
+         */
+        var lastIteration = 0;
+
+        /**
+         * @property collectionCache
+         * @type {Array}
+         */
+        var collectionCache = [];
+
+        /**
          * @method poCollectionFilter
          * @param pourOver {ngPourOverCollection}
          * @return {Array}
@@ -312,20 +360,27 @@
 
             }
 
+            // Determine if we can just return the cached collection.
+            if (lastIteration === pourOver._currentIteration) {
+
+                if (pourOver._debug) {
+                    $console.timeEnd('timeMeasure');
+                }
+
+                return collectionCache;
+
+            }
+
+            // Update the iteration version.
+            lastIteration = pourOver._currentIteration;
+
             // Load current collection into a PourOver view.
-            var view    = new P.View('defaultView', pourOver._collection),
+            var view    = new P.View('defaultView', pourOver._collection, { page_size: pourOver._perPage }),
                 query   = view['match_set'],
                 filters = pourOver._collection.filters;
 
             // Update the current page number.
-            view.pageTo(pourOver._pageNumber);
-
-            if (pourOver._perPage) {
-
-                // Define the page size if we're not using infinity.
-                view['page_size'] = pourOver._perPage;
-
-            }
+            view.page(pourOver._pageNumber - 1);
 
             if (pourOver._sortBy) {
 
@@ -352,7 +407,7 @@
 
             // Update the match set with our defined query, and then return the collection.
             view['match_set'] = query;
-            var models = view.getCurrentItems();
+            collectionCache = view.getCurrentItems();
 
             if (pourOver._debug) {
                 $console.timeEnd('timeMeasure');
@@ -361,11 +416,11 @@
             if (pourOver._sortAscending) {
 
                 // Reverse the order if we're descending.
-                models = models.reverse();
+                collectionCache = collectionCache.reverse();
 
             }
 
-            return models;
+            return collectionCache;
 
         };
 
