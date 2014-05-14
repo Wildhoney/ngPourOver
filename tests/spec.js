@@ -44,13 +44,10 @@ describe('ngPourOver', function() {
         expect(collection.length).toEqual(3);
 
         expect($pourOver._sortBy).toEqual(null);
-        $pourOver.addSort('name', {
-            attr: 'name',
-            fn: function(a, b) {
-                if (a.name < b.name) return -1;
-                if (a.name > b.name) return 1;
-                return 0;
-            }
+        $pourOver.addSort('name', function(a, b) {
+            if (a.name < b.name) return -1;
+            if (a.name > b.name) return 1;
+            return 0;
         });
         $pourOver.sortBy('name');
         expect($pourOver._sortBy).not.toEqual(null);

@@ -318,7 +318,6 @@
                 filters = pourOver._collection.filters;
 
             // Update the current page number.
-            console.log(pourOver._pageNumber);
             view.pageTo(pourOver._pageNumber);
 
             if (pourOver._perPage) {
@@ -359,7 +358,7 @@
                 $console.timeEnd('timeMeasure');
             }
 
-            if (!pourOver._sortAscending) {
+            if (pourOver._sortAscending) {
 
                 // Reverse the order if we're descending.
                 models = models.reverse();

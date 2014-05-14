@@ -358,7 +358,7 @@
                 $console.timeEnd('timeMeasure');
             }
 
-            if (!pourOver._sortAscending) {
+            if (pourOver._sortAscending) {
 
                 // Reverse the order if we're descending.
                 models = models.reverse();
