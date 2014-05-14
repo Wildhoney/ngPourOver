@@ -1,10 +1,13 @@
 {
   "name": "ng-pourover",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "PourOver wrapper for Angular.js with super-quick filtering and sorting.",
   "main": "dist/ng-pourover.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "start": "node example/server.js",
+    "preinstall": "npm install --ignore-scripts",
+    "postinstall": "node_modules/bower/bin/bower install && node_modules/grunt-cli/bin/grunt build"
   },
   "repository": {
     "type": "git",
