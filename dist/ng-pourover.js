@@ -59,6 +59,22 @@
             _sortBy: null,
 
             /**
+             * @property _debug
+             * @type {Boolean}
+             * @default false
+             */
+            _debug: false,
+
+            /**
+             * @method setDebug
+             * @param enabled {Boolean}
+             * @return {void}
+             */
+            setDebug: function setDebug(enabled) {
+                this._debug = enabled;
+            },
+
+            /**
              * @method addExactFilter
              * @param property {String}
              * @param values {Array}
@@ -123,6 +139,7 @@
              * @return {void}
              */
             sortBy: function sortBy(property) {
+                this._debug++;
                 this._sortBy = property;
             },
 
@@ -131,6 +148,7 @@
              * @return {void}
              */
             unsort: function unsort() {
+                this._debug++;
                 this._sortBy = null;
             },
 
@@ -156,6 +174,7 @@
                     throw "ngPourOver: Filter '" + property + "' hasn't yet been defined.";
                 }
 
+                this._debug++;
                 this._collection.filters[property].query(value);
                 this._filters[property] = type;
 
@@ -167,6 +186,7 @@
              * @return {void}
              */
             unfilterBy: function unfilterBy(property) {
+                this._debug++;
                 this._collection.filters[property].query([]);
                 delete this._filters[property];
             },
@@ -176,6 +196,8 @@
              * @return {void}
              */
             unfilter: function unfilter() {
+
+                this._debug++;
 
                 for (var property in this._collection.filters) {
 
@@ -231,7 +253,9 @@
          */
         return function poCollectionFilter(pourOver) {
 
-            $console.time('timeMeasure');
+            if (pourOver._debug) {
+                $console.time('timeMeasure');
+            }
 
             if (typeof pourOver._collection === 'undefined') {
 
@@ -248,7 +272,7 @@
             if (pourOver._pageSize) {
 
                 // Define the page size if we're not using infinity.
-                view['page_size'] = 10;
+                view['page_size'] = pourOver._pageSize;
 
             }
 
@@ -278,7 +302,11 @@
             // Update the match set with our defined query, and then return the collection.
             view['match_set'] = query;
             var models = view.getCurrentItems();
-            $console.timeEnd('timeMeasure');
+
+            if (pourOver._debug) {
+                $console.timeEnd('timeMeasure');
+            }
+
             return models;
 
         };
