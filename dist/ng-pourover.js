@@ -45,6 +45,13 @@
             _collection: [],
 
             /**
+             * @property _collectionCache
+             * @type {Array}
+             * @private
+             */
+            _collectionCache: [],
+
+            /**
              * @property filters
              * @type {Array}
              * @private
@@ -57,6 +64,13 @@
              * @default 0
              */
             _currentIteration: 0,
+
+            /**
+             * @property _lastIteration
+             * @type {Number}
+             * @default -1
+             */
+            _lastIteration: -1,
 
             /**
              * @property _sortBy
@@ -330,19 +344,6 @@
     poApp.filter('poCollection', function poCollection() {
 
         /**
-         * @property lastIteration
-         * @type {Number}
-         * @default 0
-         */
-        var lastIteration = 0;
-
-        /**
-         * @property collectionCache
-         * @type {Array}
-         */
-        var collectionCache = [];
-
-        /**
          * @method poCollectionFilter
          * @param pourOver {ngPourOverCollection}
          * @return {Array}
@@ -361,20 +362,21 @@
             }
 
             // Determine if we can just return the cached collection.
-            if (lastIteration === pourOver._currentIteration) {
+            if (pourOver._lastIteration === pourOver._currentIteration) {
 
                 if (pourOver._debug) {
                     $console.timeEnd('timeMeasure');
                 }
 
-                return collectionCache;
+                return pourOver._collectionCache;
 
             }
 
             // Update the iteration version.
-            lastIteration = pourOver._currentIteration;
+            pourOver._lastIteration = pourOver._currentIteration;
 
             // Load current collection into a PourOver view.
+            /*jshint camelcase: true */
             var view    = new P.View('defaultView', pourOver._collection, { page_size: pourOver._perPage }),
                 query   = view['match_set'],
                 filters = pourOver._collection.filters;
@@ -407,7 +409,7 @@
 
             // Update the match set with our defined query, and then return the collection.
             view['match_set'] = query;
-            collectionCache = view.getCurrentItems();
+            pourOver._collectionCache = view.getCurrentItems();
 
             if (pourOver._debug) {
                 $console.timeEnd('timeMeasure');
@@ -416,11 +418,11 @@
             if (pourOver._sortAscending) {
 
                 // Reverse the order if we're descending.
-                collectionCache = collectionCache.reverse();
+                pourOver._collectionCache = pourOver._collectionCache.reverse();
 
             }
 
-            return collectionCache;
+            return pourOver._collectionCache;
 
         };
 
