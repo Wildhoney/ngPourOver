@@ -162,7 +162,6 @@
              */
             addExactFilter: function addExactFilter(property, values) {
                 this.addFilter('makeExactFilter', property, values);
-                return false;
             },
 
             /**
