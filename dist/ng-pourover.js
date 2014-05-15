@@ -68,9 +68,9 @@
             /**
              * @property _lastIteration
              * @type {Number}
-             * @default -1
+             * @default 0
              */
-            _lastIteration: -1,
+            _lastIteration: 0,
 
             /**
              * @property _sortBy
@@ -221,7 +221,7 @@
                 } else {
 
                     // Otherwise we'll add the sorting based on the user's preference.
-                    this._sortAscending = isAscending;
+                    this._sortAscending = !!isAscending;
 
                 }
 
