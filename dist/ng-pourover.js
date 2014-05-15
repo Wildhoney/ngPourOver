@@ -271,7 +271,7 @@
                     throw "ngPourOver: Filter '" + property + "' hasn't yet been defined.";
                 }
 
-                this._filters[property] = { property: type, value: value, type: type };;
+                this._filters[property] = { property: type, value: value, type: type };
 
             },
 
