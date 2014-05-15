@@ -12,7 +12,7 @@ Installation Steps
  * `cd ng-pourover`;
  * `npm install`;
  * `node example/server.js` (if necessary after `npm install`);
- * Browse to [http://localhost:3001/](http://localhost:3001/);
+ * Browse to [http://localhost:5001/](http://localhost:5001/);
 
 
 Getting Started

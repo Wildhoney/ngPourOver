@@ -271,8 +271,7 @@
                     throw "ngPourOver: Filter '" + property + "' hasn't yet been defined.";
                 }
 
-                this._collection.filters[property].query(value);
-                this._filters[property] = type;
+                this._filters[property] = { property: type, value: value, type: type };;
 
             },
 
@@ -283,7 +282,6 @@
              */
             unfilterBy: function unfilterBy(property) {
                 this._currentIteration++;
-                this._collection.filters[property].query([]);
                 delete this._filters[property];
             },
 
@@ -298,10 +296,7 @@
                 for (var property in this._collection.filters) {
 
                     if (this._collection.filters.hasOwnProperty(property)) {
-
-                        this._collection.filters[property].query([]);
                         delete this._filters[property];
-
                     }
 
                 }
@@ -377,8 +372,7 @@
             // Load current collection into a PourOver view.
             /*jshint camelcase: false */
             var view    = new P.View('defaultView', pourOver._collection, { page_size: pourOver._perPage }),
-                query   = view['match_set'],
-                filters = pourOver._collection.filters;
+                query   = view['match_set'];
 
             // Update the current page number.
             view.page(pourOver._pageNumber - 1);
@@ -391,20 +385,22 @@
             }
 
             // Iterate over each defined filter.
-            _.forEach(filters, function forEach(filter, property) {
+            for (var property in pourOver._filters) {
 
-                // Determine if this filter is actually set.
-                if (typeof pourOver._filters[property] === 'undefined') {
-                    return;
+                if (pourOver._filters.hasOwnProperty(property)) {
+
+                    var filter = pourOver._collection.filters[property],
+                        model  = pourOver._filters[property];
+
+                    // Perform the query on the collection.
+                    filter.query(model.value);
+
+                    // Concatenate with the other executed queries.
+                    query = query[model.type](filter['current_query']);
+
                 }
 
-                var currentQuery = filter['current_query'];
-
-                // Otherwise we'll begin chaining the queries together.
-                var type = pourOver._filters[property];
-                query    = query[type](currentQuery);
-
-            });
+            }
 
             // Update the match set with our defined query, and then return the collection.
             view['match_set'] = query;
