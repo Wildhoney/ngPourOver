@@ -1,4 +1,4 @@
-(function ngPourOver($window, $angular, $console) {
+(function ngPourOver($window, _, $angular, $console) {
 
     "use strict";
 
@@ -430,4 +430,4 @@
 
     });
 
-})(window, window.angular, window.console);
+})(window, window._, window.angular, window.console);
