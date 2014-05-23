@@ -38,6 +38,13 @@
             DEFAULT_TYPE: 'and',
 
             /**
+             * @constant TIMING_NAME
+             * @type {String}
+             * @default "timeMeasure"
+             */
+            TIMING_NAME: 'timeMeasure',
+
+            /**
              * @property _collection
              * @type {Array}
              * @private
@@ -345,7 +352,7 @@
         return function poCollectionFilter(pourOver) {
 
             if (pourOver._debug) {
-                $console.time('timeMeasure');
+                $console.time(this.TIMING_NAME);
             }
 
             if (typeof pourOver._collection === 'undefined') {
@@ -359,7 +366,7 @@
             if (pourOver._lastIteration === pourOver._currentIteration) {
 
                 if (pourOver._debug) {
-                    $console.timeEnd('timeMeasure');
+                    $console.timeEnd(this.TIMING_NAME);
                 }
 
                 return pourOver._collectionCache;
@@ -407,7 +414,7 @@
             pourOver._collectionCache = view.getCurrentItems();
 
             if (pourOver._debug) {
-                $console.timeEnd('timeMeasure');
+                $console.timeEnd(this.TIMING_NAME);
             }
 
             if (pourOver._sortAscending) {
