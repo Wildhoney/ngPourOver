@@ -28,7 +28,7 @@
 
         };
 
-        service.prototype = {
+        _.extend(service.prototype, {
 
             /**
              * @constant DEFAULT_TYPE
@@ -220,7 +220,7 @@
 
                 this._currentIteration++;
 
-                if (typeof isAscending === 'undefined' && this._sortBy === property) {
+                if (_.isUndefined(isAscending) && this._sortBy === property) {
 
                     // Reverse the sorting if the user clicked on it again.
                     this._sortAscending = !this._sortAscending;
@@ -274,7 +274,7 @@
                 }
 
                 // Determine if this filter is actually set.
-                if (typeof this._collection.filters[property] === 'undefined') {
+                if (_.isUndefined(this._collection.filters[property])) {
                     throw "ngPourOver: Filter '" + property + "' hasn't yet been defined.";
                 }
 
@@ -320,9 +320,7 @@
                 var properties = _.pluck(this._collection.items, property);
 
                 // Determine if we're dealing with properties that are arrays.
-                var propertiesAreArrays = _.every(properties, function every(property) {
-                    return _.isArray(property);
-                });
+                var propertiesAreArrays = _.every(properties, _.isArray);
 
                 // If the above resolves to true then we need to flatten them for PourOver.
                 if (propertiesAreArrays) {
@@ -333,7 +331,7 @@
 
             }
 
-        };
+        });
 
         return service;
 
@@ -355,7 +353,7 @@
                 $console.time(this.TIMING_NAME);
             }
 
-            if (typeof pourOver._collection === 'undefined') {
+            if (_.isUndefined(pourOver._collection)) {
 
                 // Return the item immediately as it may not be initialised yet.
                 return pourOver;
