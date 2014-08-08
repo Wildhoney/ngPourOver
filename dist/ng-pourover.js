@@ -411,6 +411,8 @@
 
             // Update the match set with our defined query, and then return the collection.
             view['match_set'] = query;
+
+            pourOver._totalViewItems = query.cids.length;
             pourOver._collectionCache = view.getCurrentItems();
 
             if (pourOver._debug) {

@@ -1,9 +1,10 @@
 {
   "name": "ng-pourover",
   "version": "0.1.17",
-  "homepage": "https://github.com/Wildhoney/ngPourOver",
+  "homepage": "https://github.com/maxbrokman/ngPourOver",
   "authors": [
-    "Adam <adam.timberlake@gmail.com>"
+    "Adam <adam.timberlake@gmail.com>",
+    "Max <max@civilmusic.com>"
   ],
   "description": "PourOver wrapper for Angular.js with super-quick filtering and sorting.",
   "main": "dist/ng-pourover.js",
