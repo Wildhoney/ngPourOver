@@ -174,4 +174,40 @@ describe('ngPourOver', function() {
 
     });
 
+    it ('Should be able to add a filter with a different name to its attribute', function() {
+
+        expect($pourOver._lastIteration).toEqual(0);
+        expect($pourOver._currentIteration).toEqual(1);
+        $pourOver.addExactFilter('notName', false, {attr: 'name'});
+        $pourOver.filterBy('notName', 'Adam');
+        expect($pourOver._lastIteration).toEqual(0);
+        expect($pourOver._currentIteration).toEqual(2);
+        $filter('poCollection')($pourOver);
+        expect($pourOver._lastIteration).toEqual(2);
+
+    });
+
+    it ('Should be able to filter twice over the same attribute using two different filter names', function() {
+
+        expect($pourOver._lastIteration).toEqual(0);
+        expect($pourOver._currentIteration).toEqual(1);
+
+        $pourOver.addExactFilter('notName', false, {attr: 'name'});
+        $pourOver.addExactFilter('notNameTwo', false, {attr: 'name'});
+
+        $pourOver.filterBy('notName', 'Adam');
+        expect($pourOver._currentIteration).toEqual(2);
+        var collection = $filter('poCollection')($pourOver);
+        expect(collection.length).toEqual(1);
+        expect($pourOver._lastIteration).toEqual(2);
+
+        $pourOver.filterBy('notNameTwo', 'Maria', 'or');
+        expect($pourOver._lastIteration).toEqual(2);
+        collection = $filter('poCollection')($pourOver);
+        expect(collection.length).toEqual(2);
+        expect($pourOver._lastIteration).toEqual(3);
+        expect($pourOver._currentIteration).toEqual(3);
+
+    });
+
 });
