@@ -192,7 +192,15 @@
              * @return {void}
              */
             addFilter: function addFilter(type, property, values, opts) {
-                var filter = P[type](property, values || this._fetchProperties(property), opts);
+
+                var attr = property;
+
+                if(opts && opts.attr)
+                {
+                   attr = opts.attr;
+                }
+
+                var filter = P[type](property, values || this._fetchProperties(attr), opts);
                 this._collection.addFilters([filter]);
             },
 
