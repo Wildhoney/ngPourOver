@@ -165,20 +165,22 @@
              * @method addExactFilter
              * @param property {String}
              * @param values {Array}
+             * @param opts {Object}
              * @return {void}
              */
-            addExactFilter: function addExactFilter(property, values) {
-                this.addFilter('makeExactFilter', property, values);
+            addExactFilter: function addExactFilter(property, values, opts) {
+                this.addFilter('makeExactFilter', property, values, opts);
             },
 
             /**
              * @method addInclusionFilter
              * @param property {String}
              * @param values {Array}
+             * @param opts {Object}
              * @return {void}
              */
-            addInclusionFilter: function addInclusionFilter(property, values) {
-                this.addFilter('makeInclusionFilter', property, values);
+            addInclusionFilter: function addInclusionFilter(property, values, opts) {
+                this.addFilter('makeInclusionFilter', property, values, opts);
             },
 
             /**
@@ -186,10 +188,19 @@
              * @param type {String}
              * @param property {String}
              * @param values {Array}
+             * @param opts {Object}
              * @return {void}
              */
-            addFilter: function addFilter(type, property, values) {
-                var filter = P[type](property, values || this._fetchProperties(property));
+            addFilter: function addFilter(type, property, values, opts) {
+
+                var attr = property;
+
+                if(opts && opts.attr)
+                {
+                   attr = opts.attr;
+                }
+
+                var filter = P[type](property, values || this._fetchProperties(attr), opts);
                 this._collection.addFilters([filter]);
             },
 
